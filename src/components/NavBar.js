@@ -11,8 +11,8 @@ export const NavBar = () => {
           <img src="logo192.png" alt="logo" style={{ marginRight: 10 }} />
           Online Psychologist Reporting Tool
         </Menu.Item>
-        <Menu.Item name="Dashboard 1" as={NavLink} to="/Dashboard1" />
-        <Menu.Item name="Dashboard 2" as={NavLink} to="/Dashboard2" />
+        <Menu.Item name="Dashboard 1" exact as={NavLink} to="/" />
+        <Menu.Item name="Dashboard 2" exact as={NavLink} to="/Dashboard2" />
         <Menu.Item position="right">
           <Dropdown pointing="top left" text="user">
             <Dropdown.Menu>

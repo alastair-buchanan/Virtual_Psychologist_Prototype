@@ -1,9 +1,10 @@
 import React from 'react'
+import { SimpleScatter } from './graphs/SimpleScatter'
 
 export const Dashboard2 = () => {
     return (
         <div>
-            Add pivot table here for reference
+            <SimpleScatter/>
         </div>
     )
 }
