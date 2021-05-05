@@ -5,7 +5,6 @@ import { Dashboard } from "./Dashboard";
 
 export const ReportingLayout = () => {
   return (
-    <Fragment>
       <Grid columns={1}>
         <Grid.Column width={3}>
           <ChartMenu />
@@ -14,6 +13,5 @@ export const ReportingLayout = () => {
           <Dashboard />
         </Grid.Column>
       </Grid>
-    </Fragment>
   );
 };
