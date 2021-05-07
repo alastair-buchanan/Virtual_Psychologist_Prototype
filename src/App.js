@@ -5,7 +5,7 @@ import { NavBar } from "./components/NavBar";
 import { Container } from "semantic-ui-react";
 import { Dashboard2 } from "./components/Dashboard2";
 import { Route, Switch } from "react-router";
-import { ReportingLayout } from "./components/ReportingLayout";
+import { Dashboard } from "./components/Dashboard";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
         <NavBar />
         <Container style={{ marginTop: "7em" }} fluid>
           <Switch>
-            <Route path="/" exact component={ReportingLayout} />
-            <Route path="/Dashboard1" component={ReportingLayout} />
+            <Route path="/" exact component={Dashboard} />
+            <Route path="/Dashboard1" component={Dashboard} />
             <Route path="/Dashboard2" component={Dashboard2} />
           </Switch>
         </Container>
