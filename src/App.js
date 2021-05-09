@@ -1,4 +1,3 @@
-import "./App.css";
 import "semantic-ui-css/semantic.min.css";
 import { Fragment } from "react";
 import { NavBar } from "./components/NavBar";
@@ -9,18 +8,16 @@ import { Dashboard } from "./components/Dashboard";
 
 function App() {
   return (
-    <div className="App" style={{ height: "100%", width: "100%" }}>
-      <Fragment>
-        <NavBar />
-        <Container style={{ marginTop: "7em" }} fluid>
-          <Switch>
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/Dashboard1" component={Dashboard} />
-            <Route path="/Dashboard2" component={Dashboard2} />
-          </Switch>
-        </Container>
-      </Fragment>
-    </div>
+    <Fragment>
+      <NavBar />
+      <Container style={{ padding: "7em" }} fluid>
+        <Switch>
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/Dashboard1" component={Dashboard} />
+          <Route path="/Dashboard2" component={Dashboard2} />
+        </Switch>
+      </Container>
+    </Fragment>
   );
 }
 

@@ -8,6 +8,7 @@ import {
   LabelList,
 } from "recharts";
 import { exportComponentAsJPEG } from "react-component-export-image";
+import { Container, Header } from "semantic-ui-react";
 
 const COLORS = [
   "#0088FE",
@@ -36,7 +37,8 @@ export const ReusablePieChart = ({ rowData }) => {
   const componentRef = useRef();
 
   return (
-    <Fragment>
+    <Container >
+      <Header>Case count per Company</Header>
       <ResponsiveContainer height={300}>
         <PieChart content={rowData} ref={componentRef} height={100}>
 
@@ -67,6 +69,6 @@ export const ReusablePieChart = ({ rowData }) => {
           Download
         </button>
       </span>
-    </Fragment>
+    </Container>
   );
 };
