@@ -94,7 +94,7 @@ export const BarIssuePerOrg = ({ clientData }) => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="Age" />
+            <XAxis dataKey="Organisation" />
             <YAxis />
             <Tooltip />
             <Legend />

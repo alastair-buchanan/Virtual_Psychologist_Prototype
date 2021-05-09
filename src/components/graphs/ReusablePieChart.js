@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -20,6 +20,13 @@ const COLORS = [
   "#0000FF",
 ];
 
+function countOrganisations(dataSet) {
+  return Object.keys(dataSet).map((element) => ({
+    Organisation: element,
+    Count: dataSet[element].length,
+  }));
+}
+
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -34,19 +41,28 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 };
 
 export const ReusablePieChart = ({ rowData }) => {
+  const [chartData, setChartData] = useState([])
   const componentRef = useRef();
 
+  useEffect(() => {
+    if (rowData !== null && rowData !== undefined) {
+      setChartData(countOrganisations(rowData));
+    }
+    console.log("chartOne data", chartData);
+  }, [rowData]);
+
+
   return (
-    <Container >
+    <Fragment >
       <Header>Case count per Company</Header>
       <ResponsiveContainer height={300}>
-        <PieChart content={rowData} ref={componentRef} height={100}>
+        <PieChart content={chartData} ref={componentRef} height={100}>
 
           <Pie
             isAnimationActive={false}
 
             label={renderCustomizedLabel}
-            data={rowData}
+            data={chartData}
             //type="monotone"
             labelLine={false}
             dataKey="Count"
@@ -55,7 +71,7 @@ export const ReusablePieChart = ({ rowData }) => {
           >
             <Tooltip />
             <LabelList dataKey="Organisation" position="outside" />
-            {rowData.map((entry, index) => (
+            {chartData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
@@ -69,6 +85,6 @@ export const ReusablePieChart = ({ rowData }) => {
           Download
         </button>
       </span>
-    </Container>
+    </Fragment>
   );
 };

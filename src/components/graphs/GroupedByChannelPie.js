@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -20,6 +20,13 @@ const COLORS = [
   "#0000FF",
 ];
 
+function countChannels(dataSet) {
+  return Object.keys(dataSet).map((element) => ({
+    Channel: element,
+    Count: dataSet[element].length,
+  }));
+}
+
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -35,19 +42,27 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 
 export const GroupedByChannelPie = ({ rowData }) => {
+  const [chartData, setChartData] = useState([])
     const componentRef = useRef();
+
+    useEffect(() => {
+      if (rowData !== null && rowData !== undefined) {
+        setChartData(countChannels(rowData));
+      }
+      console.log("chartOne data", chartData);
+    }, [rowData]);
   
     return (
       <Fragment>
         <Header>Case count per channel</Header>
         <ResponsiveContainer height={300}>
-          <PieChart content={rowData} ref={componentRef} height={100}>
+          <PieChart content={chartData} ref={componentRef} height={100}>
   
             <Pie
               isAnimationActive={false}
   
               label={renderCustomizedLabel}
-              data={rowData}
+              data={chartData}
               //type="monotone"
               labelLine={false}
               dataKey="Count"
@@ -56,7 +71,7 @@ export const GroupedByChannelPie = ({ rowData }) => {
             >
               <Tooltip />
               <LabelList dataKey="Channel" position="outside" />
-              {rowData.map((entry, index) => (
+              {chartData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}

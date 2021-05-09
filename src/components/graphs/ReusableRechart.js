@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { exportComponentAsJPEG } from 'react-component-export-image';
 import {
   XAxis,
@@ -21,16 +21,31 @@ const COLORS = [
   "#0000FF",
 ];
 
+function countOrganisations(dataSet) {
+  return Object.keys(dataSet).map((element) => ({
+    Organisation: element,
+    Count: dataSet[element].length,
+  }));
+}
+
 export const ReusableRechart = ({ rowData }) => {
+  const [chartData, setChartData] = useState([])
   const componentRef = useRef();
+
+  useEffect(() => {
+    if (rowData !== null && rowData !== undefined) {
+      setChartData(countOrganisations(rowData));
+    }
+    console.log("chartOne data", chartData);
+  }, [rowData]);
 
   return (
     <Fragment>
       <Header>Case count per Company</Header>
       <ResponsiveContainer height={300}>
-        <BarChart ref={componentRef} height={100} data={rowData}>
+        <BarChart ref={componentRef} height={100} data={chartData}>
           <Bar type="monotone" dataKey="Count" />
-          {rowData.map((entry, index) => (
+          {chartData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
