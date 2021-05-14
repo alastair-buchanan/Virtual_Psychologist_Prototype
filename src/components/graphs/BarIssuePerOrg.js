@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { exportComponentAsJPEG } from 'react-component-export-image';
+import { exportComponentAsJPEG } from "react-component-export-image";
 import {
   BarChart,
   Bar,
@@ -33,8 +33,22 @@ function countChannelByOrg(dataSet) {
       dataSet[element].map((v) => v.Problem_Category === "problem_cat_anxiety"),
       true
     ),
+    Relationship: countByParam(
+      dataSet[element].map(
+        (v) => v.Problem_Category === "problem_cat_relationship_problems"
+      ),
+      true
+    ),
+    Work: countByParam(
+      dataSet[element].map(
+        (v) => v.Problem_Category === "problem_cat_work_problems"
+      ),
+      true
+    ),
     Depression: countByParam(
-      dataSet[element].map((v) => v.Problem_Category === "problem_cat_depression"),
+      dataSet[element].map(
+        (v) => v.Problem_Category === "problem_cat_depression"
+      ),
       true
     ),
     Blank: countByParam(
@@ -56,35 +70,35 @@ function groupData(dataSet, property) {
 }
 
 export const BarIssuePerOrg = ({ clientData }) => {
-    const [rowData, setRowData] = useState([]);
-    const [groupedData, setGroupedData] = useState([]);
-    const [chartData, setChartData] = useState([]);
-  
-    const componentRef = useRef();
-  
-    useEffect(() => {
-      setRowData(clientData);
-    }, [clientData]);
-  
-    useEffect(() => {
-      setGroupedData(groupData(clientData, "Organisation"));
-      console.log("groupedByOrg data", groupedData);
-    }, [rowData, clientData]);
-  
-    useEffect(() => {
-      if (groupedData !== null && groupedData !== undefined) {
-        setChartData(countChannelByOrg(groupedData));
-      }
-      console.log("stacked data", chartData);
-    }, [groupedData]);
-    
-  
-    return (
-      <Fragment>
+  const [rowData, setRowData] = useState([]);
+  const [groupedData, setGroupedData] = useState([]);
+  const [chartData, setChartData] = useState([]);
+
+  const componentRef = useRef();
+
+  useEffect(() => {
+    setRowData(clientData);
+  }, [clientData]);
+
+  useEffect(() => {
+    setGroupedData(groupData(clientData, "Organisation"));
+    console.log("groupedByOrg data", groupedData);
+  }, [rowData, clientData]);
+
+  useEffect(() => {
+    if (groupedData !== null && groupedData !== undefined) {
+      setChartData(countChannelByOrg(groupedData));
+    }
+    console.log("stacked data", chartData);
+  }, [groupedData]);
+
+  return (
+    <Fragment>
+      <componentRef ref={componentRef}>
         <Header>Problem/issue per organisation </Header>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer  width="100%" height={300}>
           <BarChart
-            ref={componentRef} 
+            title="asdfasdf"
             data={chartData}
             margin={{
               top: 20,
@@ -98,18 +112,21 @@ export const BarIssuePerOrg = ({ clientData }) => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Anger" stackId="a" fill="#8884d8" />
-            <Bar dataKey="Anxiety" stackId="a" fill="#82ca9d" />
+            <Bar dataKey="Anger" stackId="a" fill="#0088FE" />
+            <Bar dataKey="Anxiety" stackId="a" fill="#00C49F" />
             <Bar dataKey="Depression" stackId="a" fill="#FFBB28" />
-            <Bar dataKey="blank" stackId="a" fill="#FF8042" />
+            <Bar dataKey="Work" stackId="a" fill="#FF8042" />
+            <Bar dataKey="Relationship" stackId="a" fill="#FF0000" />
+            <Bar dataKey="blank" stackId="a" fill="#00FF00" />
           </BarChart>
         </ResponsiveContainer>
-        <span style={{ float: "right" }}>
-          <button onClick={() => exportComponentAsJPEG(componentRef)}>
-            Download
-          </button>
-        </span>
-      </Fragment>
-    );
-  };
-  
+      </componentRef>
+
+      <span style={{ float: "right" }}>
+        <button onClick={() => exportComponentAsJPEG(componentRef)}>
+          Download
+        </button>
+      </span>
+    </Fragment>
+  );
+};

@@ -54,13 +54,12 @@ export const ReusablePieChart = ({ rowData }) => {
 
   return (
     <Fragment >
+      <componentRef ref={componentRef}>
       <Header>Case count per Company</Header>
       <ResponsiveContainer height={300}>
-        <PieChart content={chartData} ref={componentRef} height={100}>
-
+        <PieChart content={chartData} height={100}>
           <Pie
             isAnimationActive={false}
-
             label={renderCustomizedLabel}
             data={chartData}
             //type="monotone"
@@ -80,6 +79,7 @@ export const ReusablePieChart = ({ rowData }) => {
           </Pie>
         </PieChart>
       </ResponsiveContainer>
+      </componentRef>
       <span style={{ float: "right" }}>
         <button onClick={() => exportComponentAsJPEG(componentRef)}>
           Download

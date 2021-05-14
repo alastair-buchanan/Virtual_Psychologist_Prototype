@@ -41,9 +41,10 @@ export const ReusableRechart = ({ rowData }) => {
 
   return (
     <Fragment>
+      <componentRef ref={componentRef}>
       <Header>Case count per Company</Header>
       <ResponsiveContainer height={300}>
-        <BarChart ref={componentRef} height={100} data={chartData}>
+        <BarChart height={100} data={chartData}>
           <Bar type="monotone" dataKey="Count" />
           {chartData.map((entry, index) => (
               <Cell
@@ -57,6 +58,7 @@ export const ReusableRechart = ({ rowData }) => {
           
         </BarChart>
       </ResponsiveContainer>
+      </componentRef>
       <span style={{ float: "right" }}>
         <button onClick={() => exportComponentAsJPEG(componentRef)}>Download</button>
       </span>

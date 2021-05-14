@@ -6,7 +6,7 @@ async function getSampleData() {
   const data = await res.json();
   return data.map((element) => ({
     Organisation: element.Organisation,
-    Date: new Date(element.Date),
+    Date: element.Date,
     Country: element.Country,
     Age: element["Age Category"],
     Gender: element.Gender,
@@ -29,7 +29,7 @@ async function getFilteredData() {
   const data = await res.json();
   return data.map((element) => ({
     Organisation: element.Organisation,
-    Date: new Date(element.Date),
+    Date: element.Date,
     Country: element.Country,
     Age: element["Age Category"],
     Gender: element.Gender,

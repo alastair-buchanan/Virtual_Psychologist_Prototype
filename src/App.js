@@ -10,7 +10,7 @@ function App() {
   return (
     <Fragment>
       <NavBar />
-      <Container style={{ padding: "7em" }} fluid>
+      <Container style={{ padding: "4em" }} fluid>
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/Dashboard1" component={Dashboard} />

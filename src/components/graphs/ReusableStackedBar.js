@@ -80,29 +80,30 @@ export const ReusableStackedBar = ({ clientData }) => {
 
   return (
     <Fragment>
-      <Header>Case count per channel by age</Header>
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart
-          ref={componentRef}
-          data={chartData}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="Age" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="fb_messenger" stackId="a" fill="#8884d8" />
-          <Bar dataKey="sms" stackId="a" fill="#82ca9d" />
-          <Bar dataKey="whatsapp" stackId="a" fill="#FFBB28" />
-          <Bar dataKey="blank" stackId="a" fill="#FF8042" />
-        </BarChart>
-      </ResponsiveContainer>
+      <componentRef ref={componentRef}>
+        <Header>Case count per channel by age</Header>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart
+            data={chartData}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="Age" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="fb_messenger" stackId="a" fill="#8884d8" />
+            <Bar dataKey="sms" stackId="a" fill="#82ca9d" />
+            <Bar dataKey="whatsapp" stackId="a" fill="#FFBB28" />
+            <Bar dataKey="blank" stackId="a" fill="#FF8042" />
+          </BarChart>
+        </ResponsiveContainer>
+      </componentRef>
       <span style={{ float: "right" }}>
         <button onClick={() => exportComponentAsJPEG(componentRef)}>
           Download
