@@ -28,39 +28,51 @@ function countChannels(dataSet) {
 }
 
 const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
   return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
   );
 };
 
-
 export const GroupedByChannelPie = ({ rowData }) => {
-  const [chartData, setChartData] = useState([])
-    const componentRef = useRef();
+  const [chartData, setChartData] = useState([]);
+  const componentRef = useRef();
 
-    useEffect(() => {
-      if (rowData !== null && rowData !== undefined) {
-        setChartData(countChannels(rowData));
-      }
-      console.log("chartOne data", chartData);
-    }, [rowData]);
-  
-    return (
-      <Fragment>
+  useEffect(() => {
+    if (rowData !== null && rowData !== undefined) {
+      setChartData(countChannels(rowData));
+    }
+    console.log("chartOne data", chartData);
+  }, [rowData]);
+
+  return (
+    <Fragment>
+      <componentRef ref={componentRef}>
         <Header>Case count per channel</Header>
         <ResponsiveContainer height={300}>
           <PieChart content={chartData} ref={componentRef} height={100}>
-  
             <Pie
               isAnimationActive={false}
-  
               label={renderCustomizedLabel}
               data={chartData}
               //type="monotone"
@@ -80,12 +92,12 @@ export const GroupedByChannelPie = ({ rowData }) => {
             </Pie>
           </PieChart>
         </ResponsiveContainer>
-        <span style={{ float: "right" }}>
-          <button onClick={() => exportComponentAsJPEG(componentRef)}>
-            Download
-          </button>
-        </span>
-      </Fragment>
-    );
-  };
-  
+      </componentRef>
+      <span style={{ float: "right" }}>
+        <button onClick={() => exportComponentAsJPEG(componentRef)}>
+          Download
+        </button>
+      </span>
+    </Fragment>
+  );
+};

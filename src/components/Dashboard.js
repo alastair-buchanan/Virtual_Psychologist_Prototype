@@ -10,6 +10,7 @@ import { BarIssuePerOrg } from "./graphs/BarIssuePerOrg";
 import { AgeFilter } from "./searchBars/AgeFilter";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+import { PresentingIssueTrends } from "./graphs/PresentingIssueTrends";
 
 function filterByAge(data, param) {
   return data.filter((stock) => stock.Age === param);
@@ -22,6 +23,7 @@ export const Dashboard = () => {
   const [groupedByOrg, setGroupedByOrg] = useState([]);
   const [groupedByChannel, setGroupedByChannel] = useState([]);
   const [groupedByIssue, setGroupedByIssue] = useState([]);
+  const [groupedByDate, setGroupedByDate] = useState([]);
   const [ageFilter, setAgeFilter] = useState();
 
   function groupData(dataSet, property) {
@@ -48,6 +50,8 @@ export const Dashboard = () => {
     setGroupedByOrg(groupData(rowData, "Organisation"));
     setGroupedByIssue(groupData(rowData, "Problem_Category"));
     setGroupedByChannel(groupData(rowData, "Channel"));
+    setGroupedByDate(groupData(rowData, "Date"));
+    console.log(groupedByDate);
   }, [rowData, clientData]);
 
   if (loading) {
@@ -89,6 +93,14 @@ export const Dashboard = () => {
         </Grid.Column>
         <Grid.Column width={6}>
           <ReusableStackedBar clientData={rowData} />
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <BarIssuePerOrg clientData={rowData} />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row >
+        <Grid.Column width={10} >
+          <PresentingIssueTrends clientData={rowData} />
         </Grid.Column>
         <Grid.Column width={6}>
           <BarIssuePerOrg clientData={rowData} />
