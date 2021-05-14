@@ -26,7 +26,7 @@ export const GeneralTable = ({ rowData, organisations, issues, channels }) => {
     <Table celled>
       <TableBody>
         <TableRow>
-          <TableCell>Number of users:</TableCell>
+          <TableCell>Total messages sent:</TableCell>
           <TableCell>{rowData.length}</TableCell>
         </TableRow>
         <TableRow>

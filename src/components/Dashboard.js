@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "semantic-ui-react";
-import { useClientData } from "../api/Api";
+import { useClientData, useFilteredData } from "../api/Api";
 import { GeneralTable } from "./tables/GeneralTable";
 import { ReusableRechart } from "./graphs/ReusableRechart";
 import { ReusablePieChart } from "./graphs/ReusablePieChart";
@@ -17,6 +17,7 @@ function filterByAge(data, param) {
 
 export const Dashboard = () => {
   const { loading, clientData, error } = useClientData();
+  const { filterLoading, filteredData, filterError } = useFilteredData();
   const [rowData, setRowData] = useState([]);
   const [groupedByOrg, setGroupedByOrg] = useState([]);
   const [groupedByChannel, setGroupedByChannel] = useState([]);
