@@ -9,7 +9,7 @@ import {
   Bar,
   Cell,
 } from "recharts";
-import { Header } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 const COLORS = [
   "#0088FE",
@@ -41,8 +41,13 @@ export const ReusableRechart = ({ rowData }) => {
 
   return (
     <Fragment>
+      <span style={{ float: "right" }}>
+        <Button onClick={() => exportComponentAsJPEG(componentRef)}>
+          <img height="15" width="15" src={"download_icon.png"}/>
+        </Button>
+      </span>
       <componentRef ref={componentRef}>
-      <Header>Case count per Company</Header>
+      <Header textAlign='center'>Case count per Company</Header>
       <ResponsiveContainer height={300}>
         <BarChart height={100} data={chartData}>
           <Bar type="monotone" dataKey="Count" />
@@ -52,16 +57,13 @@ export const ReusableRechart = ({ rowData }) => {
                 fill={COLORS[index % COLORS.length]}
               />
             ))}
-          <Tooltip />
+          <Tooltip verticalAlign="top" height={36}/>
           <XAxis dataKey="Organisation" />
           <YAxis />
           
         </BarChart>
       </ResponsiveContainer>
       </componentRef>
-      <span style={{ float: "right" }}>
-        <button onClick={() => exportComponentAsJPEG(componentRef)}>Download</button>
-      </span>
     </Fragment>
   );
 };

@@ -8,7 +8,7 @@ import {
   LabelList,
 } from "recharts";
 import { exportComponentAsJPEG } from "react-component-export-image";
-import { Header } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 const COLORS = [
   "#0088FE",
@@ -67,8 +67,13 @@ export const GroupedByChannelPie = ({ rowData }) => {
 
   return (
     <Fragment>
+      <span style={{ float: "right" }}>
+        <Button onClick={() => exportComponentAsJPEG(componentRef)}>
+          <img height="15" width="15" src={"download_icon.png"}/>
+        </Button>
+      </span>
       <componentRef ref={componentRef}>
-        <Header>Case count per channel</Header>
+        <Header textAlign='center'>Case count per channel</Header>
         <ResponsiveContainer height={300}>
           <PieChart content={chartData} ref={componentRef} height={100}>
             <Pie
@@ -93,11 +98,6 @@ export const GroupedByChannelPie = ({ rowData }) => {
           </PieChart>
         </ResponsiveContainer>
       </componentRef>
-      <span style={{ float: "right" }}>
-        <button onClick={() => exportComponentAsJPEG(componentRef)}>
-          Download
-        </button>
-      </span>
     </Fragment>
   );
 };
