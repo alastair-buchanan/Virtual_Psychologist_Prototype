@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Header } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 function countByParam(data, param) {
   var count = 0;
@@ -80,8 +80,13 @@ export const ReusableStackedBar = ({ clientData }) => {
 
   return (
     <Fragment>
+      <span style={{ float: "right" }}>
+        <Button onClick={() => exportComponentAsJPEG(componentRef)}>
+          <img height="15" width="15" src={"download_icon.png"}/>
+        </Button>
+      </span>
       <componentRef ref={componentRef}>
-        <Header>Case count per channel by age</Header>
+        <Header textAlign='center'>Case count per channel by age</Header>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart
             data={chartData}
@@ -96,19 +101,15 @@ export const ReusableStackedBar = ({ clientData }) => {
             <XAxis dataKey="Age" />
             <YAxis />
             <Tooltip />
-            <Legend />
+
             <Bar dataKey="fb_messenger" stackId="a" fill="#8884d8" />
             <Bar dataKey="sms" stackId="a" fill="#82ca9d" />
             <Bar dataKey="whatsapp" stackId="a" fill="#FFBB28" />
             <Bar dataKey="blank" stackId="a" fill="#FF8042" />
+            <Legend verticalAlign="top" wrapperStyle={{top: -5, left: 25}}/>
           </BarChart>
         </ResponsiveContainer>
       </componentRef>
-      <span style={{ float: "right" }}>
-        <button onClick={() => exportComponentAsJPEG(componentRef)}>
-          Download
-        </button>
-      </span>
     </Fragment>
   );
 };

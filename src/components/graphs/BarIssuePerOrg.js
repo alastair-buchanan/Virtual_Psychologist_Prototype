@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Header } from "semantic-ui-react";
+import { Button, Header, Icon } from "semantic-ui-react";
 
 function countByParam(data, param) {
   var count = 0;
@@ -94,8 +94,13 @@ export const BarIssuePerOrg = ({ clientData }) => {
 
   return (
     <Fragment>
+      <span style={{ float: "right" }}>
+        <Button onClick={() => exportComponentAsJPEG(componentRef)}>
+          <img height="15" width="15" src={"download_icon.png"}/>
+        </Button>
+      </span>
       <componentRef ref={componentRef}>
-        <Header>Problem/issue per organisation </Header>
+        <Header textAlign='center'>Problem/issue per organisation </Header>
         <ResponsiveContainer  width="100%" height={300}>
           <BarChart
             title="asdfasdf"
@@ -111,7 +116,7 @@ export const BarIssuePerOrg = ({ clientData }) => {
             <XAxis dataKey="Organisation" />
             <YAxis />
             <Tooltip />
-            <Legend />
+            <Legend verticalAlign="top" wrapperStyle={{top: -5, left: 25}}/>
             <Bar dataKey="Anger" stackId="a" fill="#0088FE" />
             <Bar dataKey="Anxiety" stackId="a" fill="#00C49F" />
             <Bar dataKey="Depression" stackId="a" fill="#FFBB28" />
@@ -122,11 +127,7 @@ export const BarIssuePerOrg = ({ clientData }) => {
         </ResponsiveContainer>
       </componentRef>
 
-      <span style={{ float: "right" }}>
-        <button onClick={() => exportComponentAsJPEG(componentRef)}>
-          Download
-        </button>
-      </span>
+      
     </Fragment>
   );
 };

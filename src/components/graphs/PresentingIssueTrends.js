@@ -11,7 +11,7 @@ import {
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
-import { Header } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 function countByParam(data, param) {
   var count = 0;
@@ -95,10 +95,16 @@ export const PresentingIssueTrends = ({ clientData }) => {
 
   return (
     <Fragment>
+      <span style={{ float: "right" }}>
+        <Button onClick={() => exportComponentAsJPEG(componentRef)}>
+          <img height="15" width="15" src={"download_icon.png"}/>
+        </Button>
+      </span>
       <componentRef ref={componentRef} height={300}>
-      <Header>Problem/issue by date </Header>
-        <ResponsiveContainer width={"100%"} height={350} >
+      <Header textAlign='center'>Problem/issue by date </Header>
+        <ResponsiveContainer width={"100%"} height={300} >
         <LineChart width="100%" data={chartData}>
+          <Legend verticalAlign="topOutside" wrapperStyle={{top: -20, left: 25}}/>
           <Line type="monotone" dataKey="Anger" stroke="#8884d8" />
           <Line type="monotone" dataKey="Anxiety" stroke="#00C49F" />
           <Line type="monotone" dataKey="Depression" stroke="#FFBB28" />
@@ -107,17 +113,11 @@ export const PresentingIssueTrends = ({ clientData }) => {
           <Line type="monotone" dataKey="Blank" stroke="#00FF00" />
           <CartesianGrid stroke="#ccc" />
           <YAxis />
-          <Tooltip />
+          <Tooltip verticalAlign="top" height={36}/>
           <XAxis dataKey="Date" />
-          <Legend verticalAlign="bottomOutside"/>
         </LineChart>
         </ResponsiveContainer>
       </componentRef>
-      <span style={{ float: "right" }}>
-        <button onClick={() => exportComponentAsJPEG(componentRef)}>
-          Download
-        </button>
-      </span>
     </Fragment>
   );
 };

@@ -8,7 +8,7 @@ import {
   LabelList,
 } from "recharts";
 import { exportComponentAsJPEG } from "react-component-export-image";
-import { Container, Header } from "semantic-ui-react";
+import { Button, Container, Header } from "semantic-ui-react";
 
 const COLORS = [
   "#0088FE",
@@ -29,7 +29,7 @@ function countOrganisations(dataSet) {
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.3;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -54,8 +54,13 @@ export const ReusablePieChart = ({ rowData }) => {
 
   return (
     <Fragment >
+      <span style={{ float: "right" }}>
+        <Button onClick={() => exportComponentAsJPEG(componentRef)}>
+          <img height="15" width="15" src={"download_icon.png"}/>
+        </Button>
+      </span>
       <componentRef ref={componentRef}>
-      <Header>Case count per Company</Header>
+      <Header textAlign='center'>Case count per Company</Header>
       <ResponsiveContainer height={300}>
         <PieChart content={chartData} height={100}>
           <Pie
@@ -63,6 +68,8 @@ export const ReusablePieChart = ({ rowData }) => {
             label={renderCustomizedLabel}
             data={chartData}
             //type="monotone"
+            innerRadius={80}
+            outerRadius={120}
             labelLine={false}
             dataKey="Count"
             stroke="#000000"
@@ -80,11 +87,6 @@ export const ReusablePieChart = ({ rowData }) => {
         </PieChart>
       </ResponsiveContainer>
       </componentRef>
-      <span style={{ float: "right" }}>
-        <button onClick={() => exportComponentAsJPEG(componentRef)}>
-          Download
-        </button>
-      </span>
     </Fragment>
   );
 };
