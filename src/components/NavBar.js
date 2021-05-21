@@ -1,15 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { Container, Dropdown, Menu } from "semantic-ui-react";
+import { Container, Dropdown, Header, Image, Item, Menu } from "semantic-ui-react";
 
 export const NavBar = () => {
   return (
-    <Menu fixed="top" inverted>
+    <Menu fixed="top" inverted color={"VP blue"}>
       <Container>
         <Menu.Item header exact to="/">
-          <img src="logo192.png" alt="logo" style={{ marginRight: 10 }} />
-          Online Psychologist Reporting Tool
+          <Image size='small' height={3} fluid src="VP_Logo_text.png"/>
         </Menu.Item>
         <Menu.Item name="Dashboard 1" exact as={NavLink} to="/" />
         <Menu.Item name="Dashboard 2" exact as={NavLink} to="/Dashboard2" />

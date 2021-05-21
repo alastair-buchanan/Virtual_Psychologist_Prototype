@@ -1,59 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableRow } from "semantic-ui-react";
 
-// function sortOrganisation(dataSet) {
-//   const newArray = ([]);
-//   return Object.keys(dataSet)
-//     .map((element) => ({
-//       Organisation: element,
-//       Count: dataSet[element].length,
-//     }))
+function filterByIssue(data, param) {
+  return data.filter((stock) => stock["Problem_Category"] === param);
+}
 
-// }
+export const GeneralTable = ({
+  rowData,
+  organisations,
+  filteredData
+}) => {
+  const [numberMessages, setNumberMessages] = useState();
+  const [numberOrganisations, setNumberOrganisations] = useState();
+  const [fData, setFData] = useState(filteredData);
 
-export const GeneralTable = ({ rowData, organisations, issues, channels }) => {
-  const [numberClients, setNumberClients] = useState();
-  const [mostOrganisation, setMostOrganisation] = useState();
-  const [mostIssues, setMostIssues] = useState();
-  const [mostChannels, setMostChannels] = useState();
 
-  // useEffect(() => {
-  //   setNumberClients(rowData.length);
-  //   setMostOrganisation(sortOrganisation(organisations).sort((a, b) => (a.Count > b.Count ? 1 : b.last_nom > a.last_nom ? -1 : 0)));
-  // }, [rowData, organisations, issues, channels]);
+  useEffect(() => {
+    setNumberMessages(rowData.length);
+    setNumberOrganisations(Object.keys(organisations).length - 1);
+  }, [rowData, organisations]);
+
+  useEffect(() => {
+    setFData(filteredData);
+  }, [filteredData]);
 
   return (
     <Table celled>
       <TableBody>
         <TableRow>
           <TableCell>Total messages sent:</TableCell>
-          <TableCell>{rowData.length}</TableCell>
+          <TableCell>{numberMessages}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>Number of organisations:</TableCell>
-          <TableCell>{rowData.length}</TableCell>
+          <TableCell>{numberOrganisations}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Highest Age group:</TableCell>
-          <TableCell>{numberClients}</TableCell>
+          <TableCell>Total Anxiety:</TableCell>
+          <TableCell>{filterByIssue(fData, "Anxiety").length}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Greatest issue:</TableCell>
-          <TableCell>{numberClients}</TableCell>
+          <TableCell>Total Anger:</TableCell>
+          <TableCell>{filterByIssue(fData, "Anger").length}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Highest volume day:</TableCell>
-          <TableCell>{numberClients}</TableCell>
+          <TableCell>Total Depression:</TableCell>
+          <TableCell>{filterByIssue(fData, "Depression").length}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Number of clients:</TableCell>
-          <TableCell>{numberClients}</TableCell>
+          <TableCell>Total Work Problems:</TableCell>
+          <TableCell>{filterByIssue(fData, "Work Problems").length}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Number of clients:</TableCell>
-          <TableCell>{numberClients}</TableCell>
+          <TableCell>Total Relationship Problems:</TableCell>
+          <TableCell>{filterByIssue(fData, "Relationship Problems").length}</TableCell>
         </TableRow>
-      </TableBody>
+      </TableBody> 
     </Table>
   );
 };

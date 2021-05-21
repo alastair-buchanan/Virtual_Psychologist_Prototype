@@ -27,28 +27,28 @@ function countChannelByDate(dataSet) {
     return Object.keys(dataSet).map((element) => ({
       Date: element,
       Anger: countByParam(
-        dataSet[element].map((v) => v.Problem_Category === "problem_cat_anger"),
+        dataSet[element].map((v) => v.Problem_Category === "Anger"),
         true
       ),
       Anxiety: countByParam(
-        dataSet[element].map((v) => v.Problem_Category === "problem_cat_anxiety"),
+        dataSet[element].map((v) => v.Problem_Category === "Anxiety"),
         true
       ),
       Relationship: countByParam(
         dataSet[element].map(
-          (v) => v.Problem_Category === "problem_cat_relationship_problems"
+          (v) => v.Problem_Category === "Relationship Problems"
         ),
         true
       ),
       Work: countByParam(
         dataSet[element].map(
-          (v) => v.Problem_Category === "problem_cat_work_problems"
+          (v) => v.Problem_Category === "Work Problems"
         ),
         true
       ),
       Depression: countByParam(
         dataSet[element].map(
-          (v) => v.Problem_Category === "problem_cat_depression"
+          (v) => v.Problem_Category === "Depression"
         ),
         true
       ),
@@ -83,14 +83,12 @@ export const PresentingIssueTrends = ({ clientData }) => {
 
   useEffect(() => {
     setGroupedData(groupData(clientData, "Date"));
-    console.log("groupedByDate data", groupedData);
   }, [rowData, clientData]);
 
   useEffect(() => {
     if (groupedData !== null && groupedData !== undefined) {
       setChartData(countChannelByDate(groupedData));
     }
-    console.log("stacked data", chartData);
   }, [groupedData]);
 
   return (

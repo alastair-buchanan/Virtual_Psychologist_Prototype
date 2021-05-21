@@ -24,7 +24,7 @@ async function getSampleData() {
 }
 
 async function getFilteredData() {
-  const url = 'filtered_by_ticket.json';
+  const url = 'filtered_by_ticket2.json';
   let res = await fetch(url);
   const data = await res.json();
   return data.map((element) => ({

@@ -68,14 +68,12 @@ export const ReusableStackedBar = ({ clientData }) => {
 
   useEffect(() => {
     setGroupedData(groupData(clientData, "Age"));
-    console.log("groupedByOrg data", groupedData);
   }, [rowData, clientData]);
 
   useEffect(() => {
     if (groupedData !== null && groupedData !== undefined) {
       setChartData(countChannelByAge(groupedData));
     }
-    console.log("stacked data", chartData);
   }, [groupedData]);
 
   return (
@@ -103,9 +101,9 @@ export const ReusableStackedBar = ({ clientData }) => {
             <Tooltip />
 
             <Bar dataKey="fb_messenger" stackId="a" fill="#8884d8" />
-            <Bar dataKey="sms" stackId="a" fill="#82ca9d" />
-            <Bar dataKey="whatsapp" stackId="a" fill="#FFBB28" />
-            <Bar dataKey="blank" stackId="a" fill="#FF8042" />
+            <Bar dataKey="sms" stackId="b" fill="#82ca9d" />
+            <Bar dataKey="whatsapp" stackId="c" fill="#FFBB28" />
+            <Bar dataKey="blank" stackId="d" fill="#FF8042" />
             <Legend verticalAlign="top" wrapperStyle={{top: -5, left: 25}}/>
           </BarChart>
         </ResponsiveContainer>

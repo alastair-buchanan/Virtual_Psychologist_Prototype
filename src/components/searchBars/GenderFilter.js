@@ -3,21 +3,21 @@ import { Dropdown } from "semantic-ui-react";
 
 const genders = [
     {
-      id: "gender_female",
-      value: "gender_female",
+      id: "Female",
+      value: "Female",
       text: "Female",
     },
     {
-      id: "gender_male",
-      value: "gender_male",
+      id: "Male",
+      value: "Male",
       text: "Male",
     },
     {
-      id: "gender_non-binary",
-      value: "gender_non-binary",
+      id: "Non-binary",
+      value: "Non-binary",
       text: "Non-binary",
     },
-    { id: "gender_not_stated", value: "gender_not_stated", text: "Not_stated" },
+    { id: "Not stated", value: "Not stated", text: "Not stated" },
     { id: null, value: null, text: "Reset" },
   ];
 

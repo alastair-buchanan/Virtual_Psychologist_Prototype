@@ -4,26 +4,26 @@ import "react-pivottable/pivottable.css";
 import TableRenderers from "react-pivottable/TableRenderers";
 import Plot from "react-plotly.js";
 import createPlotlyRenderers from "react-pivottable/PlotlyRenderers";
-import { useClientData } from "../api/Api";
+import { useFilteredData } from "../api/Api";
 
 const PlotlyRenderers = createPlotlyRenderers(Plot);
 
 export const Dashboard2 = () => {
-  const { loading, clientData, error } = useClientData();
+  const { filterLoading, filteredData, filterError } = useFilteredData();
   const [state, setState] = useState();
 
   const componentRef = useRef();
 
-  if (loading) {
+  if (filterLoading) {
     return <div>loading</div>;
   }
-  if (error) {
+  if (filterError) {
     return <div>console.error();</div>;
   }
   return (
       <PivotTableUI
         ref={componentRef}
-        data={clientData}
+        data={filteredData}
         onChange={(s) => setState(s)}
         renderers={Object.assign({}, TableRenderers, PlotlyRenderers)}
         {...state}
