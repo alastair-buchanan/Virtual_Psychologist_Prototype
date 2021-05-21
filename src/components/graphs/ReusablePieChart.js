@@ -48,7 +48,6 @@ export const ReusablePieChart = ({ rowData }) => {
     if (rowData !== null && rowData !== undefined) {
       setChartData(countOrganisations(rowData));
     }
-    console.log("chartOne data", chartData);
   }, [rowData]);
 
 

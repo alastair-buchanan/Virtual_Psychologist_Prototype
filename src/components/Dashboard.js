@@ -10,6 +10,8 @@ import { BarIssuePerOrg } from "./graphs/BarIssuePerOrg";
 import { AgeFilter } from "./searchBars/AgeFilter";
 import { PresentingIssueTrends } from "./graphs/PresentingIssueTrends";
 import { GenderFilter } from "./searchBars/GenderFilter";
+import { StackedBarRemotenessIssue } from "./graphs/StackedBarRemotenessIssue";
+import { DateFilter } from "./searchBars/DateFilter";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
@@ -23,21 +25,24 @@ function filterByGender(data, param) {
   return data.filter((stock) => stock.Gender === param);
 }
 
+function filterByDate(data, param) {
+  var data;
+  data = data.filter((stock) => new Date(stock.Date) > param[0]);
+  data = data.filter((stock) => new Date(stock.Date) < param[1]);
+  return data;
+}
+
 export const Dashboard = () => {
   const { loading, clientData, error } = useClientData();
   const { filterLoading, filteredData, filterError } = useFilteredData();
   const [rowData, setRowData] = useState([]);
   const [filteredRowData, setFilteredRowData] = useState([]);
   const [groupedByOrg, setGroupedByOrg] = useState([]);
-  const [groupedByChannel, setGroupedByChannel] = useState([]);
-  const [groupedByIssue, setGroupedByIssue] = useState([]);
-  const [groupedByDate, setGroupedByDate] = useState([]);
   const [groupedByFilteredOrg, setGroupedByFilteredOrg] = useState([]);
   const [groupedByFilteredChannel, setGroupedByFilteredChannel] = useState([]);
-  const [groupedByFilteredIssue, setGroupedByFilteredIssue] = useState([]);
-  const [groupedByFilteredDate, setGroupedByFilteredDate] = useState([]);
   const [ageFilter, setAgeFilter] = useState();
   const [genderFilter, setGenderFilter] = useState();
+  const [dateFilter, setDateFilter] = useState();
 
   function groupData(dataSet, property) {
     return dataSet.reduce((acc, obj) => {
@@ -54,6 +59,7 @@ export const Dashboard = () => {
     let data = clientData;
     let fData = filteredData;
     if (ageFilter !== null) {
+      
       data = filterByAge(data, ageFilter);
       fData = filterByAge(fData, ageFilter);
     }
@@ -61,20 +67,19 @@ export const Dashboard = () => {
       data = filterByGender(data, genderFilter);
       fData = filterByGender(fData, genderFilter);
     }
+    if (dateFilter !== undefined && dateFilter !== null) {
+      console.log("datefilter: ", dateFilter[0]);
+      data = filterByDate(data, dateFilter);
+      fData = filterByDate(fData, dateFilter);
+    }
     setRowData(data);
     setFilteredRowData(fData);
-    console.log("rowdata by date", rowData);
-  }, [clientData, ageFilter, genderFilter, rowData.props]);
+  }, [clientData, ageFilter, genderFilter, rowData.props, dateFilter]);
 
   useEffect(() => {
     setGroupedByOrg(groupData(rowData, "Organisation"));
-    setGroupedByIssue(groupData(rowData, "Problem_Category"));
-    setGroupedByChannel(groupData(rowData, "Channel"));
-    setGroupedByDate(groupData(rowData, "Date"));
     setGroupedByFilteredOrg(groupData(filteredRowData, "Organisation"));
-    setGroupedByFilteredIssue(groupData(filteredRowData, "Problem_Category"));
     setGroupedByFilteredChannel(groupData(filteredRowData, "Channel"));
-    setGroupedByFilteredDate(groupData(filteredRowData, "Date"));
   }, [rowData, filteredRowData, clientData]);
 
   if (loading || filterLoading) {
@@ -86,13 +91,15 @@ export const Dashboard = () => {
   return (
     <Grid celled>
       <Grid.Row>
-        <Grid.Column width={4}>
+        <Grid.Column width={2}>
           <AgeFilter onSubmit={setAgeFilter} />
         </Grid.Column>
-        <Grid.Column width={4}>
-          <GenderFilter  onSubmit={setGenderFilter} />
+        <Grid.Column width={2}>
+          <GenderFilter onSubmit={setGenderFilter} />
         </Grid.Column>
-        <Grid.Column width={4}></Grid.Column>
+        <Grid.Column width={2}>
+          <DateFilter onSubmit={setDateFilter}/>
+        </Grid.Column>
         <Grid.Column width={4}></Grid.Column>
       </Grid.Row>
       <Grid.Row width={16}>
@@ -101,8 +108,7 @@ export const Dashboard = () => {
             width="10%"
             rowData={rowData}
             organisations={groupedByOrg}
-            issues={groupedByIssue}
-            channels={groupedByChannel}
+            filteredData={filteredRowData}
           />
         </Grid.Column>
         <Grid.Column width={6}>
@@ -124,11 +130,11 @@ export const Dashboard = () => {
         </Grid.Column>
       </Grid.Row>
       <Grid.Row >
+        <Grid.Column width={6}>
+          <StackedBarRemotenessIssue clientData={filteredRowData} />
+        </Grid.Column>
         <Grid.Column width={10} >
           <PresentingIssueTrends clientData={filteredRowData} />
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <BarIssuePerOrg clientData={filteredRowData} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

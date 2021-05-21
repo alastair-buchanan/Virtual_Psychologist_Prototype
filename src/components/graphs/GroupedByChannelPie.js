@@ -62,7 +62,6 @@ export const GroupedByChannelPie = ({ rowData }) => {
     if (rowData !== null && rowData !== undefined) {
       setChartData(countChannels(rowData));
     }
-    console.log("chartOne data", chartData);
   }, [rowData]);
 
   return (
