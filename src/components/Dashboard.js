@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 import { useClientData, useFilteredData } from "../api/Api";
 import { GeneralTable } from "./tables/GeneralTable";
 import { ReusableRechart } from "./graphs/ReusableRechart";
@@ -12,6 +12,7 @@ import { PresentingIssueTrends } from "./graphs/PresentingIssueTrends";
 import { GenderFilter } from "./searchBars/GenderFilter";
 import { StackedBarRemotenessIssue } from "./graphs/StackedBarRemotenessIssue";
 import { DateFilter } from "./searchBars/DateFilter";
+import { CSVLink, CSVDownload } from "react-csv";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
@@ -97,10 +98,15 @@ export const Dashboard = () => {
         <Grid.Column width={2}>
           <GenderFilter onSubmit={setGenderFilter} />
         </Grid.Column>
-        <Grid.Column width={2}>
+        <Grid.Column textAlign='center' centered width={2}>
           <DateFilter onSubmit={setDateFilter}/>
         </Grid.Column>
-        <Grid.Column width={4}></Grid.Column>
+        <Grid.Column width={2}>
+          <Button>
+            <CSVLink data={filteredRowData}>Download to CSV</CSVLink>
+          </Button>
+          
+        </Grid.Column>
       </Grid.Row>
       <Grid.Row width={16}>
         <Grid.Column width={4}>

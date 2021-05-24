@@ -10,5 +10,5 @@ export const DateFilter = (props) => {
 
   useEffect(() => props.onSubmit(currentDate), [currentDate, props]);
 
-  return <SemanticDatepicker format="DD-MM-YYYY" onChange={onChange} type="range" />;
+  return <SemanticDatepicker fluid format="DD-MM-YYYY" onChange={onChange} type="range" />;
 };
