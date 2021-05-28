@@ -8,7 +8,7 @@ import {
   LabelList,
 } from "recharts";
 import { exportComponentAsJPEG } from "react-component-export-image";
-import { Button, Container, Header } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 const COLORS = [
   "#0088FE",
@@ -55,7 +55,7 @@ export const ReusablePieChart = ({ rowData }) => {
     <Fragment >
       <span style={{ float: "right" }}>
         <Button onClick={() => exportComponentAsJPEG(componentRef)}>
-          <img height="15" width="15" src={"download_icon.png"}/>
+          <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
       <componentRef ref={componentRef}>

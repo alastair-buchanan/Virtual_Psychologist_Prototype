@@ -17,7 +17,7 @@ export const GeneralTable = ({
 
   useEffect(() => {
     setNumberMessages(rowData.length);
-    setNumberOrganisations(Object.keys(organisations).length - 1);
+    setNumberOrganisations(Object.keys(organisations).filter(e => e).length);
   }, [rowData, organisations]);
 
   useEffect(() => {

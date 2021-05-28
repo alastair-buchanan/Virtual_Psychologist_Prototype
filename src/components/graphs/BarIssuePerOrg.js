@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { Button, Header, Icon } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 function countByParam(data, param) {
   var count = 0;
@@ -94,7 +94,7 @@ export const BarIssuePerOrg = ({ clientData }) => {
     <Fragment>
       <span style={{ float: "right" }}>
         <Button onClick={() => exportComponentAsJPEG(componentRef)}>
-          <img height="15" width="15" src={"download_icon.png"}/>
+          <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
       <componentRef ref={componentRef}>

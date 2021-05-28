@@ -22,9 +22,9 @@ function countByParam(data, param) {
   return count;
 }
 
-function countChannelByOrg(dataSet) {
+function countChannelByDay(dataSet) {
   return Object.keys(dataSet).map((element) => ({
-    Organisation: element,
+    Day: element,
     Anger: countByParam(
       dataSet[element].map((v) => v.Problem_Category === "Anger"),
       true
@@ -69,8 +69,7 @@ function groupData(dataSet, property) {
   }, {});
 }
 
-
-export const StackedBarRemotenessIssue = ({ clientData }) => {
+export const BarIssueDay = ({ clientData }) => {
     const [rowData, setRowData] = useState([]);
     const [groupedData, setGroupedData] = useState([]);
     const [chartData, setChartData] = useState([]);
@@ -82,12 +81,12 @@ export const StackedBarRemotenessIssue = ({ clientData }) => {
     }, [clientData]);
   
     useEffect(() => {
-      setGroupedData(groupData(clientData, "MMM_Code"));
+      setGroupedData(groupData(clientData, "Day"));
     }, [rowData, clientData]);
   
     useEffect(() => {
       if (groupedData !== null && groupedData !== undefined) {
-        setChartData(countChannelByOrg(groupedData));
+        setChartData(countChannelByDay(groupedData));
       }
     }, [groupedData]);
   
@@ -99,7 +98,7 @@ export const StackedBarRemotenessIssue = ({ clientData }) => {
           </Button>
         </span>
         <componentRef ref={componentRef}>
-          <Header textAlign='center'>Presenting problem vs remoteness index</Header>
+          <Header textAlign='center'>Problem/issue per Day of Week</Header>
           <ResponsiveContainer  width="100%" height={300}>
             <BarChart
               data={chartData}
@@ -111,7 +110,7 @@ export const StackedBarRemotenessIssue = ({ clientData }) => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="Organisation" />
+              
               <YAxis />
               <Tooltip />
               <Legend verticalAlign="top" wrapperStyle={{top: -5, left: 25}}/>
@@ -121,6 +120,7 @@ export const StackedBarRemotenessIssue = ({ clientData }) => {
               <Bar dataKey="Work" stackId="a" fill="#FF8042" />
               <Bar dataKey="Relationship" stackId="a" fill="#FF0000" />
               <Bar dataKey="blank" stackId="a" fill="#00FF00" />
+              <XAxis dataKey="Day" />
             </BarChart>
           </ResponsiveContainer>
         </componentRef>

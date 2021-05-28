@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 import { Button, Header } from "semantic-ui-react";
@@ -95,7 +94,7 @@ export const PresentingIssueTrends = ({ clientData }) => {
     <Fragment>
       <span style={{ float: "right" }}>
         <Button onClick={() => exportComponentAsJPEG(componentRef)}>
-          <img height="15" width="15" src={"download_icon.png"}/>
+          <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
       <componentRef ref={componentRef} height={300}>
