@@ -42,7 +42,7 @@ export const ReusableRechart = ({ rowData }) => {
     <Fragment>
       <span style={{ float: "right" }}>
         <Button onClick={() => exportComponentAsJPEG(componentRef)}>
-          <img height="15" width="15" src={"download_icon.png"}/>
+          <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
       <componentRef ref={componentRef}>
