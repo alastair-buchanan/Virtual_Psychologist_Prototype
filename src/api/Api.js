@@ -19,7 +19,8 @@ async function getSampleData() {
     Note_Type: element["Note Type"],
     Time: element.Time,
     User: element.User,
-    Ticket: element.Ticket
+    Ticket: element.Ticket,
+    Business_Unit: element["Business Unit"]
   }));
 }
 
@@ -42,7 +43,8 @@ async function getFilteredData() {
     Note_Type: element["Note Type"],
     Time: element.Time,
     User: element.User,
-    Ticket: element.Ticket
+    Ticket: element.Ticket,
+    Business_Unit: element["Business Unit"]
   }));
 }
 

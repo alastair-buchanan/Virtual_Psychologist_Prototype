@@ -83,7 +83,7 @@ export const ReusableStackedBar = ({ clientData }) => {
           <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
-      <componentRef ref={componentRef}>
+      <div ref={componentRef}>
         <Header textAlign='center'>Case count per channel by age</Header>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart
@@ -99,7 +99,6 @@ export const ReusableStackedBar = ({ clientData }) => {
             <XAxis dataKey="Age" />
             <YAxis />
             <Tooltip />
-
             <Bar dataKey="fb_messenger" stackId="a" fill="#8884d8" />
             <Bar dataKey="sms" stackId="b" fill="#82ca9d" />
             <Bar dataKey="whatsapp" stackId="c" fill="#FFBB28" />
@@ -107,7 +106,7 @@ export const ReusableStackedBar = ({ clientData }) => {
             <Legend verticalAlign="top" wrapperStyle={{top: -5, left: 25}}/>
           </BarChart>
         </ResponsiveContainer>
-      </componentRef>
+      </div>
     </Fragment>
   );
 };

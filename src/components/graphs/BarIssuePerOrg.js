@@ -97,7 +97,7 @@ export const BarIssuePerOrg = ({ clientData }) => {
           <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
-      <componentRef ref={componentRef}>
+      <div ref={componentRef}>
         <Header textAlign='center'>Problem/issue per organisation </Header>
         <ResponsiveContainer  width="100%" height={300}>
           <BarChart
@@ -123,7 +123,7 @@ export const BarIssuePerOrg = ({ clientData }) => {
             <Bar dataKey="blank" stackId="a" fill="#00FF00" />
           </BarChart>
         </ResponsiveContainer>
-      </componentRef>
+      </div>
 
       
     </Fragment>
