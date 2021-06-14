@@ -11,6 +11,7 @@ export const NavBar = () => {
         </Menu.Item>
         <Menu.Item name="Dashboard" as={NavLink} exact to="/" />
         <Menu.Item name="Chart Builder" as={NavLink} to="/Dashboard2" />
+        <Menu.Item name="User Guide" as={NavLink} to="/UserGuide" />
         <Menu.Item position="right">
           <Dropdown pointing="top left" icon="user">
             <Dropdown.Menu>

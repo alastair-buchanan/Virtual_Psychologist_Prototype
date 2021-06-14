@@ -5,6 +5,7 @@ import { Container } from "semantic-ui-react";
 import { Dashboard2 } from "./components/Dashboard2";
 import { Route, Switch } from "react-router";
 import { Dashboard } from "./components/Dashboard";
+import { UserGuide } from "./components/UserGuide";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" exact component={Dashboard} />
           <Route path="/Dashboard1" component={Dashboard} />
           <Route path="/Dashboard2" component={Dashboard2} />
+          <Route path="/UserGuide" component={UserGuide} />
         </Switch>
       </Container>
     </Fragment>
