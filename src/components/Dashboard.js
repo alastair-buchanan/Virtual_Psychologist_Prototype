@@ -18,6 +18,7 @@ import { OrganisationFilter } from "./searchBars/OrganisationFilter";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+import { BusinessUnitFilter } from "./searchBars/BusinessUnitFilter";
 
 function filterByAge(data, param) {
   return data.filter((stock) => stock.Age === param);
@@ -42,6 +43,10 @@ function filterByOrganisation(data, param) {
   return data.filter((stock) => stock.Organisation === param);
 }
 
+function filterByBusinessUnit(data, param) {
+  return data.filter((stock) => stock.Business_Unit === param);
+}
+
 export const Dashboard = () => {
   const { loading, clientData, error } = useClientData();
   const { filterLoading, filteredData, filterError } = useFilteredData();
@@ -55,6 +60,7 @@ export const Dashboard = () => {
   const [dateFilter, setDateFilter] = useState();
   const [countryFilter, setCountryFilter] = useState();
   const [organisationFilter, setOrganisationFilter] = useState();
+  const [businessUnitFilter, setBusinessUnitFilter] = useState();
 
   function groupData(dataSet, property) {
     return dataSet.reduce((acc, obj) => {
@@ -90,6 +96,10 @@ export const Dashboard = () => {
       data = filterByOrganisation(data, organisationFilter);
       fData = filterByOrganisation(fData, organisationFilter);
     }
+    if (businessUnitFilter !== undefined && businessUnitFilter !== null) {
+      data = filterByBusinessUnit(data, businessUnitFilter);
+      fData = filterByBusinessUnit(fData, businessUnitFilter);
+    }
     setRowData(data);
     setFilteredRowData(fData);
   }, [
@@ -101,6 +111,7 @@ export const Dashboard = () => {
     genderFilter,
     rowData.props,
     dateFilter,
+    businessUnitFilter
   ]);
 
   useEffect(() => {
@@ -118,23 +129,26 @@ export const Dashboard = () => {
   return (
     <Grid celled>
       <Grid.Row>
-        <Grid.Column width={3}>
+        <Grid.Column width={2}>
           <AgeFilter onSubmit={setAgeFilter} />
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column width={2}>
           <GenderFilter onSubmit={setGenderFilter} />
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column width={2}>
           <OrganisationFilter onSubmit={setOrganisationFilter} />
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column width={2}>
           <DayFilter onSubmit={setCountryFilter} />
         </Grid.Column>
-        <Grid.Column textAlign="center" centered width={2}>
+        <Grid.Column width={2}>
+          <BusinessUnitFilter onSubmit={setBusinessUnitFilter} />
+        </Grid.Column>
+        <Grid.Column textAlign="center" centered="true" width={3}>
           <DateFilter onSubmit={setDateFilter} />
         </Grid.Column>
 
-        <Grid.Column textAlign="center" width={2}>
+        <Grid.Column textAlign="center" width={3}>
           <Button>
             <CSVLink data={filteredRowData}>Download to CSV</CSVLink>
           </Button>

@@ -45,9 +45,9 @@ export const ReusableRechart = ({ rowData }) => {
           <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
-      <componentRef ref={componentRef}>
+      <div ref={componentRef}>
       <Header textAlign='center'>Case count per Company</Header>
-      <ResponsiveContainer height={300}>
+      <ResponsiveContainer width="100%" height={300}>
         <BarChart height={100} data={chartData}>
           <Bar type="monotone" dataKey="Count" />
           {chartData.map((entry, index) => (
@@ -62,7 +62,7 @@ export const ReusableRechart = ({ rowData }) => {
           
         </BarChart>
       </ResponsiveContainer>
-      </componentRef>
+      </div>
     </Fragment>
   );
 };

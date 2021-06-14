@@ -97,7 +97,7 @@ export const PresentingIssueTrends = ({ clientData }) => {
           <img alt="exportJpeg" height="15" width="15" src={"download_icon.png"}/>
         </Button>
       </span>
-      <componentRef ref={componentRef} height={300}>
+      <div ref={componentRef} height={300}>
       <Header textAlign='center'>Problem/issue by date </Header>
         <ResponsiveContainer width={"100%"} height={300} >
         <LineChart width="100%" data={chartData}>
@@ -114,7 +114,7 @@ export const PresentingIssueTrends = ({ clientData }) => {
           <XAxis dataKey="Date" />
         </LineChart>
         </ResponsiveContainer>
-      </componentRef>
+      </div>
     </Fragment>
   );
 };
