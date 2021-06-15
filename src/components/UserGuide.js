@@ -4,12 +4,7 @@ import { Document } from "react-pdf/dist/esm/entry.webpack";
 import { Button } from "semantic-ui-react";
 
 export const UserGuide = () => {
-  const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
 
   function nextPage() {
     if (pageNumber !== 10) {
@@ -36,7 +31,6 @@ export const UserGuide = () => {
       >
         <Document
           file="VP_User_guide.pdf"
-          onLoadSuccess={onDocumentLoadSuccess}
         >
           <Page width={1000} pageNumber={pageNumber} />
         </Document>

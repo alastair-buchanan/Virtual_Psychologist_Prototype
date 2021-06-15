@@ -4,7 +4,7 @@ import { useClientData, useFilteredData } from "../api/Api";
 import { GeneralTable } from "./tables/GeneralTable";
 import { ReusablePieChart } from "./graphs/ReusablePieChart";
 import { GroupedByChannelPie } from "./graphs/GroupedByChannelPie";
-import { ReusableStackedBar } from "./graphs/ReusableStackedBar";
+import { ReusableStackedBar } from "./graphs/BarCaseChannelAge";
 import { BarIssuePerOrg } from "./graphs/BarIssuePerOrg";
 import { AgeFilter } from "./searchBars/AgeFilter";
 import { PresentingIssueTrends } from "./graphs/PresentingIssueTrends";
